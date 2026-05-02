@@ -4,49 +4,49 @@
 
 @layer base {
   :root {
-    --background: 230 20% 7%;
-    --foreground: 220 15% 95%;
+    --background: 222 28% 7%;
+    --foreground: 45 30% 96%;
 
-    --card: 230 18% 10%;
-    --card-foreground: 220 15% 95%;
+    --card: 222 25% 10%;
+    --card-foreground: 45 30% 96%;
 
-    --popover: 230 18% 10%;
-    --popover-foreground: 220 15% 95%;
+    --popover: 222 25% 10%;
+    --popover-foreground: 45 30% 96%;
 
-    --primary: 265 85% 65%;
+    --primary: 214 80% 52%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 230 15% 15%;
-    --secondary-foreground: 220 15% 85%;
+    --secondary: 222 20% 15%;
+    --secondary-foreground: 45 20% 85%;
 
-    --muted: 230 15% 13%;
-    --muted-foreground: 220 10% 55%;
+    --muted: 222 20% 13%;
+    --muted-foreground: 220 10% 52%;
 
-    --accent: 185 90% 50%;
-    --accent-foreground: 230 20% 7%;
+    --accent: 43 96% 56%;
+    --accent-foreground: 222 28% 7%;
 
     --destructive: 0 72% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 230 15% 16%;
-    --input: 230 15% 13%;
-    --ring: 265 85% 65%;
+    --border: 222 18% 17%;
+    --input: 222 18% 13%;
+    --ring: 214 80% 52%;
 
     --radius: 1rem;
 
-    --neon-purple: #a855f7;
-    --neon-cyan: #06d6f5;
-    --neon-pink: #f72585;
-    --neon-green: #4ade80;
+    --ru-blue: #1a56db;
+    --ru-gold: #f5a623;
+    --ru-red: #e02020;
+    --ru-light: #e8f0fe;
 
-    --sidebar-background: 230 20% 8%;
-    --sidebar-foreground: 220 15% 90%;
-    --sidebar-primary: 265 85% 65%;
+    --sidebar-background: 222 28% 8%;
+    --sidebar-foreground: 45 20% 90%;
+    --sidebar-primary: 214 80% 52%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 230 15% 14%;
-    --sidebar-accent-foreground: 220 15% 85%;
-    --sidebar-border: 230 15% 14%;
-    --sidebar-ring: 265 85% 65%;
+    --sidebar-accent: 222 20% 14%;
+    --sidebar-accent-foreground: 45 20% 85%;
+    --sidebar-border: 222 18% 15%;
+    --sidebar-ring: 214 80% 52%;
   }
 }
 
@@ -68,11 +68,11 @@
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: hsl(265 85% 65% / 0.4);
+    background: hsl(214 80% 52% / 0.35);
     border-radius: 2px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: hsl(265 85% 65% / 0.7);
+    background: hsl(214 80% 52% / 0.6);
   }
 }
 
@@ -85,28 +85,30 @@
   }
 
   .glass-strong {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.07);
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .neon-glow {
     box-shadow:
-      0 0 20px rgba(168, 85, 247, 0.3),
-      0 0 60px rgba(168, 85, 247, 0.1);
+      0 0 20px rgba(26, 86, 219, 0.4),
+      0 0 60px rgba(26, 86, 219, 0.15);
+  }
+
+  .gold-glow {
+    box-shadow:
+      0 0 16px rgba(245, 166, 35, 0.5),
+      0 0 40px rgba(245, 166, 35, 0.15);
   }
 
   .neon-text {
-    text-shadow: 0 0 20px rgba(168, 85, 247, 0.8);
-  }
-
-  .cyan-glow {
-    box-shadow: 0 0 20px rgba(6, 214, 245, 0.3);
+    text-shadow: 0 0 20px rgba(26, 86, 219, 0.8);
   }
 
   .message-bubble-out {
-    background: linear-gradient(135deg, #a855f7, #7c3aed);
+    background: linear-gradient(135deg, #1a56db, #1e40af);
     border-radius: 18px 18px 4px 18px;
   }
 
@@ -119,31 +121,31 @@
   .nav-active {
     background: linear-gradient(
       135deg,
-      rgba(168, 85, 247, 0.25),
-      rgba(6, 214, 245, 0.1)
+      rgba(26, 86, 219, 0.28),
+      rgba(245, 166, 35, 0.08)
     );
-    border: 1px solid rgba(168, 85, 247, 0.4);
-    color: #a855f7;
+    border: 1px solid rgba(26, 86, 219, 0.45);
+    color: #4f8ef7;
   }
 
   .mesh-bg {
     background:
       radial-gradient(
-        ellipse 80% 50% at 20% 20%,
-        rgba(168, 85, 247, 0.12) 0%,
+        ellipse 80% 50% at 15% 20%,
+        rgba(26, 86, 219, 0.14) 0%,
         transparent 60%
       ),
       radial-gradient(
-        ellipse 60% 40% at 80% 80%,
-        rgba(6, 214, 245, 0.08) 0%,
+        ellipse 60% 40% at 85% 80%,
+        rgba(245, 166, 35, 0.07) 0%,
         transparent 60%
       ),
       radial-gradient(
-        ellipse 40% 60% at 60% 30%,
-        rgba(247, 37, 133, 0.06) 0%,
+        ellipse 40% 50% at 55% 10%,
+        rgba(26, 86, 219, 0.06) 0%,
         transparent 50%
       ),
-      hsl(230 20% 7%);
+      hsl(222 28% 7%);
   }
 
   .typing-dot {
@@ -154,6 +156,21 @@
   }
   .typing-dot:nth-child(3) {
     animation-delay: 0.4s;
+  }
+
+  /* Орнаментальная полоска — русский акцент */
+  .ru-stripe {
+    background: linear-gradient(
+      90deg,
+      #1a56db 0%,
+      #1a56db 33%,
+      #fff 33%,
+      #fff 66%,
+      #e02020 66%,
+      #e02020 100%
+    );
+    height: 2px;
+    opacity: 0.5;
   }
 }
 

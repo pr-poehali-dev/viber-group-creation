@@ -78,11 +78,15 @@ function AuthScreen({ onDone }: { onDone: () => void }) {
       <div className="w-full max-w-sm animate-fade-slide-up">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center mx-auto mb-4 neon-glow">
-            <Icon name="Zap" size={30} className="text-white" />
+          <div className="relative mx-auto mb-4 w-16 h-16">
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-900 flex items-center justify-center neon-glow">
+              <Icon name="MessageCircleHeart" size={30} className="text-white" />
+            </div>
+            <div className="ru-stripe absolute -bottom-1 left-0 right-0 rounded-full" />
           </div>
-          <h1 className="font-montserrat font-bold text-2xl text-foreground">NovaMess</h1>
-          <div className="flex items-center justify-center gap-1.5 mt-1.5">
+          <h1 className="font-montserrat font-bold text-3xl text-foreground tracking-wide">Весток</h1>
+          <p className="text-sm text-muted-foreground font-golos mt-0.5">Российский защищённый мессенджер</p>
+          <div className="flex items-center justify-center gap-1.5 mt-2">
             <Icon name="Shield" size={12} className="text-green-400" />
             <span className="text-xs text-green-400 font-golos">Сквозное шифрование E2E</span>
           </div>
@@ -126,7 +130,7 @@ function AuthScreen({ onDone }: { onDone: () => void }) {
               <button
                 onClick={submitPhone}
                 disabled={loading}
-                className="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-violet-600 text-white font-montserrat font-semibold text-sm hover:scale-[1.02] active:scale-[0.98] transition-transform neon-glow disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-blue-800 text-white font-montserrat font-semibold text-sm hover:scale-[1.02] active:scale-[0.98] transition-transform neon-glow disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {loading ? <><Icon name="Loader" size={16} className="animate-spin" />Отправка...</> : <>Получить код <Icon name="ArrowRight" size={16} /></>}
               </button>
@@ -207,9 +211,9 @@ function AuthScreen({ onDone }: { onDone: () => void }) {
               <button
                 onClick={submitName}
                 disabled={loading}
-                className="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-violet-600 text-white font-montserrat font-semibold text-sm hover:scale-[1.02] active:scale-[0.98] transition-transform neon-glow disabled:opacity-50 flex items-center justify-center gap-2"
+                className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-blue-800 text-white font-montserrat font-semibold text-sm hover:scale-[1.02] active:scale-[0.98] transition-transform neon-glow disabled:opacity-50 flex items-center justify-center gap-2"
               >
-                {loading ? <><Icon name="Loader" size={16} className="animate-spin" />Входим...</> : <>Войти в NovaMess <Icon name="ArrowRight" size={16} /></>}
+                {loading ? <><Icon name="Loader" size={16} className="animate-spin" />Входим...</> : <>Войти в Весток <Icon name="ArrowRight" size={16} /></>}
               </button>
             </div>
           )}
@@ -416,7 +420,7 @@ function InviteModal({ onClose }: { onClose: () => void }) {
                 <button
                   onClick={() => sendInvite(p.id)}
                   disabled={sending === p.id}
-                  className="flex items-center gap-1.5 text-xs font-golos font-medium px-3 py-1.5 rounded-lg bg-gradient-to-r from-purple-600 to-violet-600 text-white hover:scale-105 active:scale-95 transition-transform disabled:opacity-60 disabled:cursor-not-allowed"
+                  className="flex items-center gap-1.5 text-xs font-golos font-medium px-3 py-1.5 rounded-lg bg-gradient-to-r from-blue-600 to-blue-800 text-white hover:scale-105 active:scale-95 transition-transform disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   {sending === p.id ? (
                     <><Icon name="Loader" size={12} className="animate-spin" />Отправка</>
@@ -613,7 +617,7 @@ function CreateGroupModal({ onClose, onCreate }: { onClose: () => void; onCreate
             <div className="px-4 py-3 border-t border-white/6">
               <button
                 onClick={goNext}
-                className="w-full py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-violet-600 text-white font-montserrat font-semibold text-sm hover:scale-[1.02] active:scale-[0.98] transition-transform neon-glow flex items-center justify-center gap-2"
+                className="w-full py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-800 text-white font-montserrat font-semibold text-sm hover:scale-[1.02] active:scale-[0.98] transition-transform neon-glow flex items-center justify-center gap-2"
               >
                 Далее <Icon name="ArrowRight" size={15} />
               </button>
@@ -678,7 +682,7 @@ function CreateGroupModal({ onClose, onCreate }: { onClose: () => void; onCreate
               <button
                 onClick={create}
                 disabled={loading}
-                className="w-full py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-violet-600 text-white font-montserrat font-semibold text-sm hover:scale-[1.02] active:scale-[0.98] transition-transform neon-glow disabled:opacity-50 flex items-center justify-center gap-2"
+                className="w-full py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-800 text-white font-montserrat font-semibold text-sm hover:scale-[1.02] active:scale-[0.98] transition-transform neon-glow disabled:opacity-50 flex items-center justify-center gap-2"
               >
                 {loading
                   ? <><Icon name="Loader" size={15} className="animate-spin" />Создаём...</>
@@ -734,14 +738,14 @@ export default function Index() {
       {/* Header */}
       <header className="glass-strong border-b border-white/8 px-4 py-3 flex items-center justify-between flex-shrink-0 z-10">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center neon-glow">
-            <Icon name="Zap" size={16} className="text-white" />
+          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center neon-glow">
+            <Icon name="MessageCircleHeart" size={16} className="text-white" />
           </div>
           <div>
-            <h1 className="font-montserrat font-bold text-base text-foreground leading-none">NovaMess</h1>
+            <h1 className="font-montserrat font-bold text-base text-foreground leading-none tracking-wide">Весток</h1>
             <div className="flex items-center gap-1 mt-0.5">
               <Icon name="Shield" size={10} className="text-green-400" />
-              <span className="text-[10px] text-green-400 font-golos">E2E шифрование активно</span>
+              <span className="text-[10px] text-green-400 font-golos">Сквозное шифрование</span>
             </div>
           </div>
         </div>
@@ -809,7 +813,7 @@ export default function Index() {
                   <div className="flex items-center justify-between mt-0.5">
                     <span className="text-xs text-muted-foreground truncate flex-1">{c.lastMsg}</span>
                     {c.unread > 0 && (
-                      <span className="ml-1 flex-shrink-0 bg-purple-600 text-white text-[9px] font-bold rounded-full min-w-[18px] h-[18px] flex items-center justify-center px-1">
+                      <span className="ml-1 flex-shrink-0 bg-blue-600 text-white text-[9px] font-bold rounded-full min-w-[18px] h-[18px] flex items-center justify-center px-1">
                         {c.unread}
                       </span>
                     )}
@@ -826,7 +830,7 @@ export default function Index() {
                     onClick={() => setCreateGroupOpen(true)}
                     className="w-full flex items-center gap-2 py-2.5 px-3 rounded-xl bg-gradient-to-r from-purple-600/20 to-cyan-600/10 border border-purple-500/30 text-purple-400 hover:from-purple-600/30 hover:border-purple-500/50 transition-all font-golos text-sm font-medium"
                   >
-                    <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-purple-600 to-violet-600 flex items-center justify-center flex-shrink-0">
+                    <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center flex-shrink-0">
                       <Icon name="Plus" size={14} className="text-white" />
                     </div>
                     Создать новую группу
@@ -1149,7 +1153,7 @@ export default function Index() {
                 </button>
                 <button
                   onClick={sendMessage}
-                  className="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-600 to-violet-600 flex items-center justify-center text-white hover:scale-105 transition-transform neon-glow"
+                  className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center text-white hover:scale-105 transition-transform neon-glow"
                 >
                   <Icon name="Send" size={15} />
                 </button>
