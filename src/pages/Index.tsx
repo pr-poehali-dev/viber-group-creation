@@ -294,6 +294,160 @@ const Avatar = ({ initials, color, status, size = "md" }: { initials: string; co
   );
 };
 
+// ─── INVITE MODAL ─────────────────────────────────────────────────────────────
+
+const PHONEBOOK = [
+  { id: 1, name: "Андрей Козлов", phone: "+7 916 123-45-01", avatar: "АК", color: "from-blue-500 to-indigo-500", inApp: false },
+  { id: 2, name: "Виктория Орлова", phone: "+7 985 234-56-02", avatar: "ВО", color: "from-pink-500 to-rose-500", inApp: false },
+  { id: 3, name: "Геннадий Фёдоров", phone: "+7 903 345-67-03", avatar: "ГФ", color: "from-orange-500 to-amber-500", inApp: false },
+  { id: 4, name: "Дарья Белова", phone: "+7 926 456-78-04", avatar: "ДБ", color: "from-teal-500 to-cyan-500", inApp: true },
+  { id: 5, name: "Евгений Карпов", phone: "+7 965 567-89-05", avatar: "ЕК", color: "from-green-500 to-emerald-500", inApp: false },
+  { id: 6, name: "Жанна Соколова", phone: "+7 977 678-90-06", avatar: "ЖС", color: "from-purple-500 to-violet-500", inApp: false },
+  { id: 7, name: "Захар Новиков", phone: "+7 999 789-01-07", avatar: "ЗН", color: "from-red-500 to-orange-500", inApp: true },
+  { id: 8, name: "Ирина Макарова", phone: "+7 910 890-12-08", avatar: "ИМ", color: "from-sky-500 to-blue-500", inApp: false },
+];
+
+function InviteModal({ onClose }: { onClose: () => void }) {
+  const [search, setSearch] = useState("");
+  const [invited, setInvited] = useState<number[]>([]);
+  const [sending, setSending] = useState<number | null>(null);
+
+  const filtered = PHONEBOOK.filter(p =>
+    p.name.toLowerCase().includes(search.toLowerCase()) ||
+    p.phone.includes(search)
+  );
+
+  const sendInvite = (id: number) => {
+    if (invited.includes(id)) return;
+    setSending(id);
+    setTimeout(() => {
+      setSending(null);
+      setInvited(prev => [...prev, id]);
+    }, 1200);
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+      <div
+        className="relative w-full max-w-md glass-strong rounded-2xl border border-white/12 animate-fade-slide-up overflow-hidden"
+        onClick={e => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="px-5 py-4 border-b border-white/8 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center">
+              <Icon name="BookUser" size={18} className="text-white" />
+            </div>
+            <div>
+              <h3 className="font-montserrat font-bold text-sm text-foreground">Записная книжка</h3>
+              <p className="text-[11px] text-muted-foreground font-golos">Пригласите контакты в NovaMess</p>
+            </div>
+          </div>
+          <button
+            onClick={onClose}
+            className="w-8 h-8 glass rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <Icon name="X" size={15} />
+          </button>
+        </div>
+
+        {/* Search */}
+        <div className="px-4 py-3 border-b border-white/6">
+          <div className="relative">
+            <Icon name="Search" size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+            <input
+              type="text"
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+              placeholder="Поиск по имени или номеру..."
+              className="w-full glass rounded-xl pl-8 pr-4 py-2 text-sm font-golos text-foreground placeholder:text-muted-foreground/50 outline-none focus:ring-1 focus:ring-purple-500/40 bg-transparent border-0"
+              autoFocus
+            />
+          </div>
+        </div>
+
+        {/* Stats */}
+        <div className="px-4 py-2 flex items-center gap-4 border-b border-white/6">
+          <div className="flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-green-400" />
+            <span className="text-[11px] text-muted-foreground font-golos">{PHONEBOOK.filter(p => p.inApp).length} уже в приложении</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-purple-400" />
+            <span className="text-[11px] text-muted-foreground font-golos">{PHONEBOOK.filter(p => !p.inApp).length} можно пригласить</span>
+          </div>
+        </div>
+
+        {/* List */}
+        <div className="overflow-y-auto max-h-80">
+          {filtered.length === 0 && (
+            <div className="py-10 text-center text-muted-foreground text-sm font-golos">
+              Контакты не найдены
+            </div>
+          )}
+          {filtered.map((p, i) => (
+            <div
+              key={p.id}
+              className="flex items-center gap-3 px-4 py-3 hover:bg-white/4 transition-all border-b border-white/4 last:border-0 animate-fade-slide-up"
+              style={{ animationDelay: `${i * 40}ms` }}
+            >
+              <div className="relative flex-shrink-0">
+                <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${p.color} flex items-center justify-center text-sm font-bold font-montserrat text-white`}>
+                  {p.avatar}
+                </div>
+                {p.inApp && (
+                  <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-green-500 border-2 border-background flex items-center justify-center">
+                    <Icon name="Check" size={8} className="text-white" />
+                  </div>
+                )}
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-golos font-medium text-foreground truncate">{p.name}</p>
+                <p className="text-xs text-muted-foreground">{p.phone}</p>
+              </div>
+              {p.inApp ? (
+                <span className="text-[10px] text-green-400 font-golos glass px-2 py-1 rounded-lg border border-green-500/20">В приложении</span>
+              ) : invited.includes(p.id) ? (
+                <span className="flex items-center gap-1 text-[10px] text-purple-400 font-golos glass px-2 py-1 rounded-lg border border-purple-500/20">
+                  <Icon name="Check" size={10} />Отправлено
+                </span>
+              ) : (
+                <button
+                  onClick={() => sendInvite(p.id)}
+                  disabled={sending === p.id}
+                  className="flex items-center gap-1.5 text-xs font-golos font-medium px-3 py-1.5 rounded-lg bg-gradient-to-r from-purple-600 to-violet-600 text-white hover:scale-105 active:scale-95 transition-transform disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  {sending === p.id ? (
+                    <><Icon name="Loader" size={12} className="animate-spin" />Отправка</>
+                  ) : (
+                    <><Icon name="Send" size={12} />Пригласить</>
+                  )}
+                </button>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Footer */}
+        <div className="px-4 py-3 border-t border-white/6 flex items-center justify-between">
+          <span className="text-[11px] text-muted-foreground font-golos">
+            {invited.length > 0 ? `Приглашено: ${invited.length}` : "Приглашение придёт в SMS"}
+          </span>
+          <button
+            onClick={onClose}
+            className="text-xs text-purple-400 font-golos hover:text-purple-300 transition-colors"
+          >
+            Закрыть
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── MESSENGER ────────────────────────────────────────────────────────────────
+
 export default function Index() {
   const [authed, setAuthed] = useState(false);
   const [section, setSection] = useState<Section>("chats");
@@ -301,6 +455,7 @@ export default function Index() {
   const [inputValue, setInputValue] = useState("");
   const [messages, setMessages] = useState(MESSAGES);
   const [videoActive, setVideoActive] = useState(false);
+  const [inviteOpen, setInviteOpen] = useState(false);
 
   if (!authed) return <AuthScreen onDone={() => setAuthed(true)} />;
 
@@ -340,11 +495,20 @@ export default function Index() {
           <button className="w-8 h-8 glass rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors">
             <Icon name="Search" size={15} />
           </button>
+          <button
+            onClick={() => setInviteOpen(true)}
+            className="w-8 h-8 glass rounded-lg flex items-center justify-center text-muted-foreground hover:text-purple-400 transition-colors"
+            title="Пригласить из записной книжки"
+          >
+            <Icon name="BookUser" size={15} />
+          </button>
           <button className="w-8 h-8 glass rounded-lg flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors">
             <Icon name="SquarePen" size={15} />
           </button>
         </div>
       </header>
+
+      {inviteOpen && <InviteModal onClose={() => setInviteOpen(false)} />}
 
       {/* Main content */}
       <div className="flex flex-1 min-h-0">
@@ -447,6 +611,19 @@ export default function Index() {
                 </div>
               </div>
             ))}
+
+            {/* Invite button in contacts */}
+            {section === "contacts" && (
+              <div className="p-3">
+                <button
+                  onClick={() => setInviteOpen(true)}
+                  className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border border-purple-500/30 text-purple-400 hover:bg-purple-500/10 transition-all font-golos text-sm font-medium"
+                >
+                  <Icon name="BookUser" size={15} />
+                  Пригласить из записной книжки
+                </button>
+              </div>
+            )}
 
             {/* NOTIFICATIONS */}
             {section === "notifications" && NOTIFICATIONS.map((n, i) => (
